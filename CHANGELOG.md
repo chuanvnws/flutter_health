@@ -1,11 +1,42 @@
+## 4.6.0
+
+- Added method for revoking permissions. On Android it uses `disableFit()` to remove access to Google Fit - `revokePermissions`. Documented lack of methods for iOS.
+
+## 4.5.0
+
+- Updated android sdk, gradle
+- Updated `enumToString` to native `.name`
+- Update and fixed JSON serialization of HealthDataPoints
+- Removed auth request in `writeWorkoutData` to avoid bug when denying the auth.
+- Merged pull requests [#653](https://github.com/cph-cachet/flutter-plugins/pull/653), [#652](https://github.com/cph-cachet/flutter-plugins/pull/652), [#639](https://github.com/cph-cachet/flutter-plugins/pull/639), [#644](https://github.com/cph-cachet/flutter-plugins/pull/644), [#668](https://github.com/cph-cachet/flutter-plugins/pull/668)
+- Further developed [#644](https://github.com/cph-cachet/flutter-plugins/pull/644) on android to accommodate having the `writeBloodPressure` api.
+- Small bug fixes
+
+## 4.4.0
+
+- Merged pull request #[566](https://github.com/cph-cachet/flutter-plugins/pull/566), [#578](https://github.com/cph-cachet/flutter-plugins/pull/578), [#596](https://github.com/cph-cachet/flutter-plugins/pull/596), [#623](https://github.com/cph-cachet/flutter-plugins/pull/623), [#632](https://github.com/cph-cachet/flutter-plugins/pull/632)
+- ECG added as part of [#566](https://github.com/cph-cachet/flutter-plugins/pull/566)
+- Small fixes
+
+## 4.3.0
+
+- upgrade to `device_info_plus: ^8.0.0`
+
+## 4.2.0
+
+- upgrade to `device_info_plus: ^7.0.0`
+
 ## 4.1.1
+
 - fix of [#572](https://github.com/cph-cachet/flutter-plugins/issues/572).
 
 ## 4.1.0
+
 - update of `device_info_plus: ^4.0.0`
 - upgraded to Dart 2.17 and Flutter 3.0
 
 ## 4.0.0
+
 - Large refactor of the `HealthDataPoint` value into generic `HealthValue` and added `NumericHealthValue`, `AudiogramHealthValue` and `WorkoutHealthValue`
 - Added support for Audiograms with `writeAudiogram` and in `getHealthDataFromTypes`
 - Added support for Workouts with `writeWorkout` and in `getHealthDataFromTypes`
@@ -19,18 +50,22 @@
 - removed `requestPermissions` as it was essentially a duplicate of `requestAuthorization`
 
 ## 3.4.4
+
 - Fix of [#500](https://github.com/cph-cachet/flutter-plugins/issues/500).
 - Added Headache-types to HealthDataTypes on iOS
 
 ## 3.4.3
+
 - fix of [#401](https://github.com/cph-cachet/flutter-plugins/issues/401).
 
 ## 3.4.2
+
 - Resolved concurrent issues with native threads [PR#483](https://github.com/cph-cachet/flutter-plugins/pull/483).
 - Healthkit CategorySample [PR#485](https://github.com/cph-cachet/flutter-plugins/pull/485).
 - update of API documentation.
 
 ## 3.4.0
+
 - Add sleep in bed to android [PR#457](https://github.com/cph-cachet/flutter-plugins/pull/457).
 - Add the android.permission.ACTIVITY_RECOGNITION setup to the README [PR#458](https://github.com/cph-cachet/flutter-plugins/pull/458).
 - Fixed (regression) issues with metric and permissions [PR#462](https://github.com/cph-cachet/flutter-plugins/pull/462).
@@ -39,6 +74,7 @@
 - update of API documentation.
 
 ## 3.3.1
+
 - DISTANCE_DELTA is for Android, not iOS [PR#428](https://github.com/cph-cachet/flutter-plugins/pull/428).
 - added missing READ_ACCESS [PR#454](https://github.com/cph-cachet/flutter-plugins/pull/454).
 
@@ -87,7 +123,7 @@
 
 ## 3.0.1+1
 
-- Bugfix regarding BMI from https://github.com/cph-cachet/flutter-plugins/pull/258
+- Bugfix regarding BMI from <https://github.com/cph-cachet/flutter-plugins/pull/258>
 
 ## 3.0.0
 
@@ -106,11 +142,11 @@
 
 ## 2.0.7
 
-- Fixed a Google sign-in issue, and a type issue on Android (https://github.com/cph-cachet/flutter-plugins/issues/201)
+- Fixed a Google sign-in issue, and a type issue on Android (<https://github.com/cph-cachet/flutter-plugins/issues/201>)
 
 ## 2.0.6
 
-- Fixed a Google sign-in issue. (https://github.com/cph-cachet/flutter-plugins/issues/172)
+- Fixed a Google sign-in issue. (<https://github.com/cph-cachet/flutter-plugins/issues/172>)
 
 ## 2.0.5
 
@@ -160,7 +196,7 @@ Added the following Health Types as per PR #147
 ## 1.1.5
 
 - Fixed an issue with google authorization
-- See https://github.com/cph-cachet/flutter-plugins/issues/133
+- See <https://github.com/cph-cachet/flutter-plugins/issues/133>
 
 ## 1.1.4
 
@@ -176,7 +212,7 @@ Added the following Health Types as per PR #147
 
 ## 1.1.1
 
-- Fixed issue #88 (https://github.com/cph-cachet/flutter-plugins/issues/88)
+- Fixed issue #88 (<https://github.com/cph-cachet/flutter-plugins/issues/88>)
 
 ## 1.1.0
 
