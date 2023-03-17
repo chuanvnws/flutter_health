@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.fitness.Fitness
 import com.google.android.gms.fitness.FitnessActivities
 import com.google.android.gms.fitness.FitnessOptions
@@ -580,7 +581,7 @@ class HealthPlugin(private var channel: MethodChannel? = null) : MethodCallHandl
             android.Manifest.permission.ACCESS_FINE_LOCATION
           ) == PackageManager.PERMISSION_GRANTED
         ) {
-          // Request permission with distance data. 
+   /*       // Request permission with distance data.
           // Google Fit requires this when we query for distance data
           // as it is restricted data
           if (!GoogleSignIn.hasPermissions(googleSignInAccount, fitnessOptions)) {
@@ -589,7 +590,7 @@ class HealthPlugin(private var channel: MethodChannel? = null) : MethodCallHandl
               GOOGLE_FIT_PERMISSIONS_REQUEST_CODE,
               googleSignInAccount,
               fitnessOptions
-            )
+            )*/
           }
           readRequestBuilder.read(DataType.TYPE_DISTANCE_DELTA)
         } 
@@ -634,7 +635,8 @@ class HealthPlugin(private var channel: MethodChannel? = null) : MethodCallHandl
     }
 
   private fun errHandler(result: Result) = OnFailureListener { exception ->
-    activity!!.runOnUiThread { result.success(null) }
+//    activity!!.runOnUiThread { result.success(null) }
+    Handler(context!!.mainLooper).run { result.success(null) }
     Log.i("FLUTTER_HEALTH::ERROR", exception.message ?: "unknown error")
     Log.i("FLUTTER_HEALTH::ERROR", exception.stackTrace.toString())
   }
@@ -789,7 +791,7 @@ class HealthPlugin(private var channel: MethodChannel? = null) : MethodCallHandl
         }
         else -> throw IllegalArgumentException("Unknown access type $access")
       }
-      if (typeKey == SLEEP_ASLEEP || typeKey == SLEEP_AWAKE || typeKey == SLEEP_IN_BED || typeKey == WORKOUT) {
+      if (typeKey == SLEEP_ASLEEP || typeKey == SLEEP_AWAKE || typeKey == SLEEP_IN_BED) {
         typesBuilder.accessSleepSessions(FitnessOptions.ACCESS_READ)
         when (access) {
           0 -> typesBuilder.accessSleepSessions(FitnessOptions.ACCESS_READ)
@@ -797,6 +799,18 @@ class HealthPlugin(private var channel: MethodChannel? = null) : MethodCallHandl
           2 -> {
             typesBuilder.accessSleepSessions(FitnessOptions.ACCESS_READ)
             typesBuilder.accessSleepSessions(FitnessOptions.ACCESS_WRITE)
+          }
+          else -> throw IllegalArgumentException("Unknown access type $access")
+        }
+      }
+
+      if (typeKey == WORKOUT) {
+        when (access) {
+          0 -> typesBuilder.accessActivitySessions(FitnessOptions.ACCESS_READ)
+          1 -> typesBuilder.accessActivitySessions(FitnessOptions.ACCESS_WRITE)
+          2 -> {
+            typesBuilder.accessActivitySessions(FitnessOptions.ACCESS_READ)
+            typesBuilder.accessActivitySessions(FitnessOptions.ACCESS_WRITE)
           }
           else -> throw IllegalArgumentException("Unknown access type $access")
         }
@@ -966,6 +980,7 @@ class HealthPlugin(private var channel: MethodChannel? = null) : MethodCallHandl
       "getTotalStepsInInterval" -> getTotalStepsInInterval(call, result)
       "hasPermissions" -> hasPermissions(call, result)
       "writeWorkoutData" -> writeWorkoutData(call, result)
+      "revokePermissions" -> revokePermissions(call, result)
       else -> result.notImplemented()
     }
   }
